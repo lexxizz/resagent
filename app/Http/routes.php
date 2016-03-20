@@ -44,11 +44,15 @@ Route::group(['middleware' => 'web'], function () {
             return view('admin.dashboard.index');
         });
 
-        Route::get('/add', 'admin\MenuController@add');
-        Route::get('/show', 'admin\MenuController@show');
-        Route::post('/store', 'admin\MenuController@store');
+        Route::get('/goods/add', 'admin\MenuController@add');
+        Route::get('/goods/show', 'admin\MenuController@show');
+        Route::get('/goods/edit/{id}', 'admin\MenuController@edit');
+        Route::post('/goods/update/{id}', 'admin\MenuController@update');
+        Route::post('/goods/store', 'admin\MenuController@store');
         Route::get('/categories/add', 'admin\CategoriesController@add');
+        Route::get('/categories/show', 'admin\CategoriesController@show');
         Route::get('/places/add', 'admin\PlacesController@add');
+        Route::get('/places/show', 'admin\PlacesController@show');
         Route::post('/categories/store', 'admin\CategoriesController@store');
         Route::post('/places/store', 'admin\PlacesController@store');
 

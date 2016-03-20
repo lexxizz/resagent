@@ -8,7 +8,7 @@ class Good extends Model
 {
     protected $table="goods";
 
-    protected $fillable=['title', 'category_id', 'place_id'];
+    protected $fillable=['title', 'category_id', 'place_id', 'clean_price', 'markup', 'description', 'active'];
 
     public function category(){
         return $this->belongsTo('App\Category');

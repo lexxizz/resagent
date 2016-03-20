@@ -27,10 +27,15 @@
               <h3>General</h3>
               <ul class="nav side-menu">
                 <li><a href="{{url('admin/')}}"><i  class="fa fa-laptop"></i> Dashboard</a></li>
+                <li><a><i class="fa fa-home"></i> Меню <span class="fa fa-chevron-down"></span></a>
+                		<ul class="nav child_menu" style="display: none">
+                		<li><a href="{{url('admin/goods/show')}}">Товары</a></li>
+                		<li><a href="{{url('admin/categories/show')}}">Категории товаров</a>
+                		<li><a href="{{url('admin/places/show')}}">Цеха</a>
+                		</ul>
+                		</li>
               </ul>
-              <ul class="nav side-menu">
-                              <li><a href="{{url('admin/add')}}"><i  class="fa fa-laptop"></i> Add to Menu</a></li>
-              </ul>
+
             </div>
 
           </div>

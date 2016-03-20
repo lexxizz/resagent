@@ -5,13 +5,6 @@
 
 <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
-            @if (session('message'))
-                <div class="alert alert-success alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                                              </button>
-                    {{ session('message') }}
-                </div>
-            @endif
             @if (count($errors) > 0)
             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -45,13 +38,13 @@
                 </div>
                 <div class="x_content">
                   <br>
-                  <form method="POST" action="{{action('admin\MenuController@store')}}" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                  <form method="POST" action="{{action('admin\MenuController@update',['id'=>$good->id])}}" id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                     <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Название <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" name="title" id="first-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="4339"><ul class="parsley-errors-list" id="parsley-id-4339"></ul>
+                        <input type="text" name="title" id="first-name" value="{{$good->title}}" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="form-group">
@@ -59,7 +52,7 @@
                                           <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select class="form-control" name="category_id">
                                             @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->title}}</option>
+                                            <option value="{{$category->id}}" selected="{{$good->category_id == $category->id ? 'selected' :''}}">{{$category->title}}</option>
                                             @endforeach
                                             </select>
                                           </div>
@@ -70,7 +63,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                   <select class="form-control" name="place_id">
                                    @foreach($places as $place)
-                                   <option value="{{$place->id}}">{{$place->title}}</option>
+                                   <option value="{{$place->id}}" selected="{{$good->place_id == $place->id ? 'selected' :''}}">{{$place->title}}</option>
                                    @endforeach
                          </select>
                         </div>
@@ -79,34 +72,34 @@
                                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="clean_price">Цена, руб <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-2 col-sm-2 col-xs-12">
-                                                  <input type="number" name="clean_price" id="clean_price" required="required" class="form-control col-md-7 col-xs-12">
+                                                  <input type="number" name="clean_price" value="{{$good->clean_price}}" id="clean_price" required="required" class="form-control col-md-7 col-xs-12">
                                                 </div>
                                               </div>
                         <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="markup">Наценка, % <span class="required">*</span>
                       </label>
                       <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="number" name="markup" id="markup" required="required" class="form-control col-md-7 col-xs-12">
+                        <input type="number" name="markup" id="markup" value="{{$good->markup}}" required="required" class="form-control col-md-7 col-xs-12">
                       </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Подробнее
                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                         <textarea  name="description" class="form-control" ></textarea>
+                         <textarea  name="description" value="{{$good->description}}" class="form-control" ></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Активный
                                            </label>
                     <div class="col-md-2 col-sm-2 col-xs-12">
-                              <input type="checkbox" name="active" value="1"  checked="checked">
+                              <input type="checkbox" name="active" value="1"  checked="{{$good->active == 1 ? 'checked' :''}}">
                         </div>
                     </div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="submit" onclick="location.back()" class="btn btn-primary">Отмена</button>
+                        <button type="submit" class="btn btn-success">Сохранить</button>
                       </div>
                     </div>
 

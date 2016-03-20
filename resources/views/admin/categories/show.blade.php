@@ -5,13 +5,6 @@
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-@if (session('message'))
-                <div class="alert alert-success alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                                              </button>
-                    {{ session('message') }}
-                </div>
-            @endif
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Товары</h2>
@@ -33,36 +26,28 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-        <div class="content-header-buttons pull-right">
-                    <a href="{{url('admin/goods/add')}}"><button class="btn btn-sm btn-success">Добавить товар</button></a>
-                </div>
+
                   <table class="table table-hover">
                     <thead>
                       <tr>
                         <th>#</th>
                         <th>Название</th>
-                        <th>Категория</th>
-                        <th>Цех</th>
-                        <th>Цена</th>
+                        <th>Активный</th>
                         <th>Дата создания</th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                    @foreach($goods as $good)
+                    @foreach($categories as $category)
                       <tr>
-                        <th scope="row">{{$good->id}}</th>
-                        <th scope="row">{{$good->title}}</th>
-                        <td>{{$good->category->title}}</td>
-                        <td>{{$good->place->title}}</td>
-                        <td>{{$good->clean_price}}  руб.</td>
-                        <td>{{$good->created_at}}</td>
-                        <td><a href="{{url('/admin/goods/edit/'.$good->id)}}">Изменить</a></td>
+                        <th scope="row">{{$category->id}}</th>
+                        <th scope="row">{{$category->title}}</th>
+                        <th scope="row">{{$category->active}}</th>
+                        <td>{{$category->created_at}}</td>
                       </tr>
                       @endforeach
                     </tbody>
 
-                  </table><div class="text-right">{{$goods->render()}}</div>
+                  </table><div class="text-right">{{$categories->render()}}</div>
 
                 </div>
               </div>

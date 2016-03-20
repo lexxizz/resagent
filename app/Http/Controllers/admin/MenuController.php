@@ -18,6 +18,13 @@ class MenuController extends Controller
         return view('admin.menu.add', ['categories'=>$categories, 'places'=>$places]);
     }
 
+    public function edit($id){
+        $categories=Category::where('active','=',1)->get();
+        $places=Place::where('active','=',1)->get();
+        $good = Good::find($id);
+        return view('admin.menu.edit', ['categories'=>$categories, 'places'=>$places, 'good'=>$good]);
+    }
+
     public function store(Request $request){
         $this->validate($request, [
             'title' => 'required|max:255',
@@ -28,9 +35,16 @@ class MenuController extends Controller
     }
 
     public function show(){
-        $goods = Good::with('category', 'place')->get();
+        $goods = Good::with('category', 'place')->paginate(10);
         return view('admin.menu.show', ['goods' =>$goods]);
         //$goods = Good::with('category', 'place');
+    }
+
+    public function update(Request $request, $id){
+            $category=Good::find($id);
+            $category->update($request->all());
+            $category->save();
+            return redirect()->action('admin\MenuController@show')->with('message', 'Товар изменён');
 
     }
 }
