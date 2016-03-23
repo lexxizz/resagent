@@ -55,6 +55,10 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/places/show', 'admin\PlacesController@show');
         Route::post('/categories/store', 'admin\CategoriesController@store');
         Route::post('/places/store', 'admin\PlacesController@store');
+        Route::get('/meals/add', 'admin\MealsController@add');
+        Route::post('/meals/store', 'admin\MealsController@store');
+        Route::get('/ingredients/add', 'admin\IngredientsController@add');
+        Route::post('/ingredients/store', 'admin\IngredientsController@store');
 
     });
 
